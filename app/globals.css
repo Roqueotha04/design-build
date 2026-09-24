@@ -2,12 +2,13 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #1a1a1a;
-
-  --primary: #1a1a1a;
+  --foreground: #111111;
+  --primary: #111111;
   --primary-foreground: #ffffff;
-  --secondary: #4a4a4a;
-  --accent: #f4f4f5;
+  --secondary: #5c5c5c;
+  --accent: #f4f4f4;
+  --celeste: #6eb4d4;
+  --line: rgba(17, 17, 17, 0.18);
 }
 
 @theme inline {
@@ -20,10 +21,33 @@
 
   --font-heading: var(--font-heading-face);
   --font-body: var(--font-body-face);
+  --font-serif: var(--font-serif-face);
+  --color-celeste: var(--celeste);
+  --color-line: var(--line);
 }
 
 html {
   scroll-behavior: smooth;
+}
+
+@media (max-width: 767px) {
+  html {
+    font-size: 65%;
+  }
+}
+
+@keyframes service-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: none; }
+}
+
+@keyframes service-time {
+  from { width: 0%; }
+  to { width: 100%; }
+}
+
+.service-in {
+  animation: service-in 0.45s ease;
 }
 
 body {

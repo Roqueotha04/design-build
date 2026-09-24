@@ -1,28 +1,22 @@
 import type { MetadataRoute } from "next";
-import { siteConfig } from "@/config/site.config";
-import { offeringSlug } from "@/lib/slug";
+import { seedContent, siteMeta } from "@/lib/content/seed";
 
 export const dynamic = "force-static";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = siteConfig.site.url;
-
-  const offeringPages: MetadataRoute.Sitemap = siteConfig.offerings.items.map(
-    (item) => ({
-      url: `${baseUrl}/oferta/${offeringSlug(item)}`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.7,
-    }),
-  );
+  const baseUrl = siteMeta.url;
+  const projects: MetadataRoute.Sitemap = seedContent.projects.map((project) => ({
+    url: `${baseUrl}/proyectos/${project.slug}`,
+    lastModified: new Date(),
+    changeFrequency: "monthly",
+    priority: 0.7,
+  }));
 
   return [
-    {
-      url: baseUrl,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 1,
-    },
-    ...offeringPages,
+    { url: baseUrl, lastModified: new Date(), changeFrequency: "monthly", priority: 1 },
+    { url: `${baseUrl}/proyectos`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.8 },
+    { url: `${baseUrl}/quienes-somos`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.8 },
+    { url: `${baseUrl}/contacto`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.8 },
+    ...projects,
   ];
 }
